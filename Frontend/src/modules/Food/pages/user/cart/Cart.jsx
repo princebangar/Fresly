@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo, Fragment } from "react"
+﻿import { useState, useEffect, useRef, useMemo, Fragment } from "react"
 import { createPortal } from "react-dom"
 import { Link, useNavigate, useLocation } from "react-router-dom"
 import { Plus, Minus, ArrowLeft, ChevronRight, Clock, MapPin, Phone, FileText, Utensils, Tag, Percent, Share2, Share, ChevronUp, ChevronDown, X, Check, Settings, CreditCard, Wallet, Building2, Sparkles, Banknote, Zap, CheckCircle2, MessageCircle, Send, Mail, Copy, ShoppingBag, AlertTriangle } from "lucide-react"
@@ -1366,7 +1366,7 @@ export default function Cart() {
   const total = pricing?.total || (totalBeforeDiscount - discount)
   const savings = pricing?.savings ?? Math.max(0, totalBeforeDiscount - total)
   
-  // Platform compare-at savings removed — admin markup is charged via price/markupAmount.
+  // Platform compare-at savings removed â€” admin markup is charged via price/markupAmount.
   const platformPricingSavings = useMemo(() => {
     return {
       hasPlatformPricing: false,
@@ -2259,7 +2259,7 @@ export default function Cart() {
           typeof window !== "undefined" &&
           Boolean(window.flutter_inappwebview) &&
           /iPhone|iPad|iPod/i.test(window.navigator?.userAgent || "")
-            ? " | After paying in your UPI app, come back to the RedGo app to confirm your order."
+            ? " | After paying in your UPI app, come back to the Fresly app to confirm your order."
             : ""
         }`,
         callback_url: callbackUrl,
@@ -2515,7 +2515,7 @@ export default function Cart() {
                       Delivery not available here
                     </p>
                     <p className="text-xs text-amber-800/80 dark:text-amber-200/70 mt-1 leading-relaxed">
-                      {restaurantName} doesn’t deliver to your selected location. Switch address to continue, or clear this cart.
+                      {restaurantName} doesnâ€™t deliver to your selected location. Switch address to continue, or clear this cart.
                     </p>
                     <div className="mt-3 flex flex-wrap items-center gap-2">
                       <button
@@ -2548,7 +2548,7 @@ export default function Cart() {
         {savings > 0 && (
           <div className="bg-green-50 dark:bg-green-950/20 px-4 md:px-6 py-2.5 flex-shrink-0 border-b border-green-100/30 dark:border-green-900/10">
             <div className="max-w-7xl mx-auto flex items-center gap-2">
-              <span className="text-sm md:text-base">🎉</span>
+              <span className="text-sm md:text-base">ðŸŽ‰</span>
               <p className="text-sm md:text-base font-semibold text-green-700 dark:text-green-400">
                 {appliedCoupon?.code 
                   ? `You saved ${RUPEE_SYMBOL}${savings} with '${appliedCoupon.code}' on this order!`
@@ -4062,7 +4062,7 @@ export default function Cart() {
 
                     {/* Exclusive Tag */}
                     <span className="text-[11px] font-bold text-gray-800 dark:text-gray-200 tracking-[0.2em] uppercase mt-4 flex items-center gap-1.5 justify-center relative z-10">
-                      ✦ EXCLUSIVELY FOR YOU ✦
+                      âœ¦ EXCLUSIVELY FOR YOU âœ¦
                     </span>
 
                     {/* Savings text */}

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+﻿import { useState, useEffect, useRef } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowLeft, Timer, RefreshCw, Loader2, Pencil, X, ShieldCheck } from "lucide-react"
@@ -437,7 +437,7 @@ export default function RestaurantOTP() {
           <div className="mb-5 text-center flex flex-col items-center">
             <img 
               src="/redgo_logo_transparent.png" 
-              alt="RedGo Logo" 
+              alt="Fresly Logo" 
               className="h-28 -mb-3.5 object-contain drop-shadow-md" 
             />
             <h2 className="text-[25px] font-extrabold text-[#B80B3D] dark:text-red-400 tracking-tight font-['Outfit']">
@@ -489,7 +489,7 @@ export default function RestaurantOTP() {
                         (otp[index] ? "border-[#B80B3D]" : "border-gray-300 dark:border-gray-600")}
                     `}
                   >
-                    {otp[index] ? otp[index] : <span className="text-gray-300 dark:text-gray-600 font-normal">•</span>}
+                    {otp[index] ? otp[index] : <span className="text-gray-300 dark:text-gray-600 font-normal">â€¢</span>}
                   </div>
                 ))}
               </div>

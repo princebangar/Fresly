@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+﻿import { useEffect, useRef, useState } from "react"
 import { useNavigate, Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { Loader2, Pencil, X, ShieldCheck } from "lucide-react"
@@ -635,7 +635,7 @@ export default function RestaurantLogin() {
           <div className="mb-5 text-center flex flex-col items-center">
             <img
               src="/redgo_logo_transparent.png"
-              alt="RedGo Logo"
+              alt="Fresly Logo"
               className="h-28 -mb-3.5 object-contain drop-shadow-md"
             />
             <h2 className="text-[25px] font-extrabold text-[#B80B3D] dark:text-red-400 tracking-tight font-['Outfit']">
@@ -738,7 +738,7 @@ export default function RestaurantLogin() {
                         onKeyDown={(e) => handleKeyDown(index, e)}
                         onPaste={index === 0 ? handlePaste : undefined}
                         className={`w-14 h-14 sm:w-16 sm:h-16 text-center text-2xl font-bold bg-gray-50 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-sm rounded-[20px] outline-none transition-all duration-300 text-gray-900 dark:text-white focus:bg-white dark:focus:bg-gray-900 focus:border-[#B80B3D] focus:ring-4 focus:ring-[#B80B3D]/10 hover:border-gray-400 ${blockTimer > 0 ? "opacity-50 cursor-not-allowed border-red-400 bg-red-50 text-red-800" : ""}`}
-                        placeholder="•"
+                        placeholder="â€¢"
                       />
                     ))}
                   </div>
@@ -804,7 +804,7 @@ export default function RestaurantLogin() {
                 >
                   TERMS
                 </Link>
-                <span className="mx-2 text-gray-400/80 font-bold">•</span>
+                <span className="mx-2 text-gray-400/80 font-bold">â€¢</span>
                 <Link
                   to="/food/restaurant/privacy"
                   state={{ from: "/food/restaurant/login" }}
@@ -813,7 +813,7 @@ export default function RestaurantLogin() {
                 >
                   PRIVACY
                 </Link>
-                <span className="mx-2 text-gray-400/80 font-bold">•</span>
+                <span className="mx-2 text-gray-400/80 font-bold">â€¢</span>
                 <Link
                   to="/food/restaurant/help-content"
                   state={{ from: "/food/restaurant/login" }}

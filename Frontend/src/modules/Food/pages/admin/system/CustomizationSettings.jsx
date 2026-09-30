@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { Settings, Loader2, SlidersHorizontal } from "lucide-react";
 import { toast } from "sonner";
 import { adminAPI } from "@food/api";
@@ -174,10 +174,10 @@ export default function CustomizationSettings() {
       await adminAPI.updateCustomizationSettings({ [key]: checked });
       if (key === "maintenance_mode_enabled") {
         try {
-          const raw = localStorage.getItem("redgo_customization_settings");
+          const raw = localStorage.getItem("fresly_customization_settings");
           const parsed = raw ? JSON.parse(raw) : {};
           localStorage.setItem(
-            "redgo_customization_settings",
+            "fresly_customization_settings",
             JSON.stringify({ ...parsed, maintenance_mode_enabled: checked === true })
           );
         } catch {

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+﻿import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { ArrowRight, Utensils, Truck, Store, Globe, Heart, Shield, Clock } from "lucide-react"
 import { motion } from "framer-motion"
@@ -60,7 +60,7 @@ export default function Home() {
               </div>
             )}
           </div>
-          <CardTitle className="text-3xl font-bold text-center">{companyName || "RedGo Food"}</CardTitle>
+          <CardTitle className="text-3xl font-bold text-center">{companyName || "Fresly Food"}</CardTitle>
           <CardDescription className="text-lg">
             Welcome to the Food Delivery Platform
           </CardDescription>
@@ -75,13 +75,13 @@ export default function Home() {
             </Link>
             <Link to="/food/restaurant" className="block">
               <Button variant="outline" className="w-full h-24 flex flex-col items-center justify-center">
-                <span className="text-2xl mb-2">🧑‍🍳</span>
+                <span className="text-2xl mb-2">ðŸ§‘â€ðŸ³</span>
                 <span className="font-semibold">Restaurant</span>
               </Button>
             </Link>
             <Link to="/food/restaurant/login" className="block">
               <Button variant="outline" className="w-full h-24 flex flex-col items-center justify-center border-2 border-[#ff8100] hover:bg-[#ff8100]/10">
-                <span className="text-2xl mb-2">🔑</span>
+                <span className="text-2xl mb-2">ðŸ”‘</span>
                 <span className="font-semibold">Restaurant Login</span>
               </Button>
             </Link>

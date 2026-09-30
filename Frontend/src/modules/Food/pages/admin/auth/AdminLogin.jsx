@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+﻿import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { adminAPI } from "@food/api";
 import { setAuthData } from "@food/utils/auth";
@@ -229,7 +229,7 @@ export default function AdminLogin() {
           <div className="w-[110px] md:w-[150px] mb-4 select-none flex justify-center items-center md:items-start">
              <img
               src="/logo-transparent.webp"
-              alt="REDGO Logo"
+              alt="FRESLY Logo"
               className="w-full object-contain rounded-xl shadow-lg border border-white/10 md:border-white/5"
             />
           </div>
