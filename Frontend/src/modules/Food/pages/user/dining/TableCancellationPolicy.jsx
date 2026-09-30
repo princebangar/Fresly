@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, ShieldCheck, ChevronRight, Info, CheckCircle2 } from 'lucide-react';
 import AnimatedPage from "@food/components/user/AnimatedPage";
@@ -82,7 +82,7 @@ export default function TableCancellationPolicy() {
                         I Understand
                     </button>
                     <p className="text-center text-[10px] text-slate-400 font-bold mt-6 uppercase tracking-widest leading-loose">
-                        By using RedGo dining, you agree to our <br />
+                        By using Fresly dining, you agree to our <br />
                         <span className="text-slate-900 underline underline-offset-4">Terms of Service</span>
                     </p>
                 </div>

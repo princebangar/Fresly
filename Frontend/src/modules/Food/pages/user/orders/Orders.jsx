@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+﻿import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import useAppBackNavigation from "@food/hooks/useAppBackNavigation"
 import { ArrowLeft, Search, MoreVertical, ChevronRight, Star, RotateCcw, AlertCircle, Loader2, Clock, X, Share2, MessageCircle, Send, Copy, Mail, MessagesSquare, Link2 } from "lucide-react"
@@ -107,7 +107,7 @@ export default function Orders() {
   // The post-delivery rating flow lives in OrderTracking.jsx (shown when the user
   // taps back after a delivered order). On the Orders list, ratings are only opened
   // via the explicit "Rate Restaurant" button so the popup never pops up on its own
-  // when the user simply visits Profile → Orders.
+  // when the user simply visits Profile â†’ Orders.
 
   // Fetch orders from backend API
   useEffect(() => {
@@ -696,11 +696,11 @@ Order again from this restaurant in the ${companyName} app.`
                         {order.restaurant}
                         {order.orderType === 'takeaway' ? (
                           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[9px] font-extrabold text-[#D97706] bg-[#FEF3C7] border border-[#F59E0B]/30 rounded-full uppercase tracking-wider shadow-sm">
-                            🥡 Takeaway (Self-Pick)
+                            ðŸ¥¡ Takeaway (Self-Pick)
                           </span>
                         ) : order.orderType === 'dining' ? (
                           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 text-[9px] font-extrabold text-[#2563EB] bg-[#DBEAFE] border border-[#3B82F6]/30 rounded-full uppercase tracking-wider shadow-sm">
-                            🍽️ Dining In
+                            ðŸ½ï¸ Dining In
                           </span>
                         ) : null}
                       </h3>
@@ -869,7 +869,7 @@ Order again from this restaurant in the ${companyName} app.`
                       <span className="font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800/80 px-2.5 py-1 rounded-lg border border-gray-200/50 dark:border-gray-700/50">
                         Placed: {formatDate(order.createdAt)}
                       </span>
-                      <span className="hidden sm:inline text-gray-300 dark:text-gray-700">•</span>
+                      <span className="hidden sm:inline text-gray-300 dark:text-gray-700">â€¢</span>
                       <span className="font-semibold text-gray-700 dark:text-gray-300">
                         {order.payment?.method === 'cash' || order.payment?.method === 'cod' ? 'Cash on Delivery' :
                           order.payment?.method === 'wallet' ? 'Wallet' : 'Online'}
@@ -1000,7 +1000,7 @@ Order again from this restaurant in the ${companyName} app.`
 
        {/* Footer Branding */}
       <div className="flex justify-center mt-8 mb-4">
-        <h1 className="text-4xl font-black text-gray-200 dark:text-gray-800 tracking-tighter italic uppercase">redgo</h1>
+        <h1 className="text-4xl font-black text-gray-200 dark:text-gray-800 tracking-tighter italic uppercase">fresly</h1>
       </div>
 
       {/* Rating & Feedback Modal */}

@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect, useRef, useCallback } from "react"
+﻿import { useMemo, useState, useEffect, useRef, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { useNavigate } from "react-router-dom"
 import { ChevronLeft, ChevronRight, Plus, MapPin, Navigation, Home, Building2, Briefcase, X, Crosshair, Search, Pencil, Trash2 } from "lucide-react"
@@ -86,7 +86,7 @@ const showAddressRemovedBrandedToast = () => {
         <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-[#DC2626]/95 to-[#991B1B]/95 flex items-center justify-center p-0.5 shadow-md flex-shrink-0">
           <img
             src="/assets/images/redgo-toast-logo.png"
-            alt="RedGo"
+            alt="Fresly"
             className="w-full h-full object-contain brightness-0 invert scale-110"
           />
         </div>

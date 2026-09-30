@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+﻿import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { ArrowLeft, ArrowRight, Heart, Users, Shield, Clock, Star, Award, FileText, Lock, Loader2, Receipt, Truck, XCircle } from "lucide-react"
 import { motion } from "framer-motion"
@@ -144,7 +144,7 @@ export default function About() {
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2"
               >
-                RedGo
+                Fresly
               </motion.h2>
 
               <motion.p
@@ -296,7 +296,7 @@ export default function About() {
           className="text-center mt-8 mb-4"
         >
           <p className="text-sm text-gray-500 dark:text-gray-500">
-            � {new Date().getFullYear()} {companyName}. All rights reserved.
+            ï¿½ {new Date().getFullYear()} {companyName}. All rights reserved.
           </p>
         </motion.div>
       </div>

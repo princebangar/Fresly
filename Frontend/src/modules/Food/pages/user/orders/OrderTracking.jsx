@@ -1,4 +1,4 @@
-import { useParams, Link, useSearchParams, useNavigate, useLocation } from "react-router-dom"
+﻿import { useParams, Link, useSearchParams, useNavigate, useLocation } from "react-router-dom"
 import React, { useState, useEffect, useMemo, useRef, useCallback, memo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { toast } from "sonner"
@@ -142,7 +142,7 @@ const TakeawayAnimation = memo(({ order }) => {
       <div className="absolute w-1.5 h-1.5 rounded-full bg-orange-300/30 blur-[1px] animate-float-bokeh-3 select-none pointer-events-none" />
       <div className="absolute w-2.5 h-2.5 rounded-full bg-yellow-200/40 blur-[1.5px] animate-float-bokeh-4 select-none pointer-events-none" />
 
-      {/* Top Typography section in Redgo-Takeaway-Self-Pickup theme */}
+      {/* Top Typography section in Fresly-Takeaway-Self-Pickup theme */}
       <div className="text-center px-4 mt-1.5 select-none pointer-events-none flex flex-col items-center z-10">
         <h3 className="text-[#7C2D12] dark:text-[#FEF3C7] font-black text-[13px] sm:text-base tracking-widest mb-0.5 select-none uppercase drop-shadow-[0_1px_2px_rgba(255,255,255,0.3)] dark:drop-shadow-md">
           ORDER, EAT, ENJOY!
@@ -249,11 +249,11 @@ const TakeawayAnimation = memo(({ order }) => {
 
       </div>
 
-      {/* Ready for pickup banner — only shown when restaurant marks ready */}
+      {/* Ready for pickup banner â€” only shown when restaurant marks ready */}
       {isReady && (
         <div className="w-full flex justify-center mt-4 z-10 select-none pointer-events-none">
           <p className="text-[#047857] dark:text-[#34D399] font-black text-[12px] sm:text-[13px] tracking-widest animate-bounce drop-shadow-sm">
-            🎉 READY FOR PICK UP!
+            ðŸŽ‰ READY FOR PICK UP!
           </p>
         </div>
       )}
@@ -1212,7 +1212,7 @@ export default function OrderTracking() {
 
       if (diffMs <= 0) {
         setEstimatedTime(0);
-        // Do NOT auto-set to 'ready' — that status must come from the restaurant
+        // Do NOT auto-set to 'ready' â€” that status must come from the restaurant
         setOrderStatus(actualStatus);
       } else {
         const mins = Math.ceil(diffMs / 60000);
@@ -1232,7 +1232,7 @@ export default function OrderTracking() {
   // DATA FETCHING & POLLING STABILITY (FIXED FOR HAMMERING)
   // --------------------------------------------------------------------------
 
-  // Socket notifications include order ids — keep a set so events match this page.
+  // Socket notifications include order ids â€” keep a set so events match this page.
   useEffect(() => {
     const s = trackingOrderIdsRef.current
     s.add(String(orderId))
@@ -1713,7 +1713,7 @@ export default function OrderTracking() {
     terminalPollStopRef.current = ui === 'delivered' || ui === 'cancelled'
   }, [order])
 
-  // Post-checkout splash only — real status comes from API / poll / socket.
+  // Post-checkout splash only â€” real status comes from API / poll / socket.
   useEffect(() => {
     if (!confirmed) return
     const timer1 = setTimeout(() => setShowConfirmation(false), 3000)
@@ -2595,7 +2595,7 @@ export default function OrderTracking() {
             transition={{ delay: 0.65 }}
           >
             <p className="text-yellow-800 dark:text-yellow-400 font-medium text-sm">
-              All your delivery details in one place 🥡
+              All your delivery details in one place ðŸ¥¡
             </p>
           </motion.div>
         )}
@@ -2944,7 +2944,7 @@ export default function OrderTracking() {
                         <p className="text-sm text-gray-500 mt-0.5">Quantity: {item.quantity}</p>
                       </div>
                     </div>
-                    <p className="font-semibold text-gray-900">₹{((item?.price || 0) * (item?.quantity || 0)).toFixed(2)}</p>
+                    <p className="font-semibold text-gray-900">â‚¹{((item?.price || 0) * (item?.quantity || 0)).toFixed(2)}</p>
                   </div>
                 ))}
               </div>
@@ -2956,39 +2956,39 @@ export default function OrderTracking() {
               
               <div className="flex justify-between items-center text-sm">
                 <span className="text-gray-600">Item Total</span>
-                <span className="text-gray-900 font-medium">₹{Number(order?.subtotal || 0).toFixed(2)}</span>
+                <span className="text-gray-900 font-medium">â‚¹{Number(order?.subtotal || 0).toFixed(2)}</span>
               </div>
 
               {Number(order?.packagingFee) > 0 && (
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-gray-600">Packaging Charges</span>
-                  <span className="text-gray-900 font-medium">₹{Number(order.packagingFee).toFixed(2)}</span>
+                  <span className="text-gray-900 font-medium">â‚¹{Number(order.packagingFee).toFixed(2)}</span>
                 </div>
               )}
 
               {Number(order?.platformFee) > 0 && (
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-gray-600">Platform Fee</span>
-                  <span className="text-gray-900 font-medium">₹{Number(order.platformFee).toFixed(2)}</span>
+                  <span className="text-gray-900 font-medium">â‚¹{Number(order.platformFee).toFixed(2)}</span>
                 </div>
               )}
 
               {order?.orderType !== "takeaway" && order?.orderType !== "dining" && (
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-gray-600">Delivery Fee</span>
-                  <span className="text-gray-900 font-medium">₹{Number(order?.deliveryFee || 0).toFixed(2)}</span>
+                  <span className="text-gray-900 font-medium">â‚¹{Number(order?.deliveryFee || 0).toFixed(2)}</span>
                 </div>
               )}
 
               <div className="flex justify-between items-center text-sm">
                 <span className="text-gray-600">GST</span>
-                <span className="text-gray-900 font-medium">₹{Number(order?.gst || 0).toFixed(2)}</span>
+                <span className="text-gray-900 font-medium">â‚¹{Number(order?.gst || 0).toFixed(2)}</span>
               </div>
 
               {Number(order?.discount) > 0 && (
                 <div className="flex justify-between items-center text-sm text-green-600 font-medium">
                   <span>Discount Applied</span>
-                  <span>-₹{Number(order.discount).toFixed(2)}</span>
+                  <span>-â‚¹{Number(order.discount).toFixed(2)}</span>
                 </div>
               )}
 
@@ -3003,7 +3003,7 @@ export default function OrderTracking() {
                     return <span className="text-green-600 dark:text-green-400 font-bold ml-1.5">(Online)</span>;
                   })()}
                 </span>
-                <span className="text-lg font-bold text-gray-900 dark:text-white">₹{Number(order?.totalAmount || 0).toFixed(2)}</span>
+                <span className="text-lg font-bold text-gray-900 dark:text-white">â‚¹{Number(order?.totalAmount || 0).toFixed(2)}</span>
               </div>
             </div>
 
