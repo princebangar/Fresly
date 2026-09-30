@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate, useNavigationType } from "react-router-dom"
+﻿import { Outlet, useLocation, useNavigate, useNavigationType } from "react-router-dom"
 import { useEffect, useState, createContext, useContext, useRef, useCallback, useMemo } from "react"
 import { toast } from "sonner"
 import { ProfileProvider } from "@food/context/ProfileContext"
@@ -211,7 +211,7 @@ function UserLayoutContent() {
         <div className="w-[calc(100vw-32px)] sm:w-[380px] bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-3xl pointer-events-auto flex items-center gap-4 p-3.5 border border-gray-50 animate-in fade-in slide-in-from-top-4">
           <div className="flex-shrink-0">
             <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-[#DC2626] to-[#991B1B] flex items-center justify-center shadow-lg">
-              <img src="/assets/images/redgo-toast-logo.png" alt="RedGo" className="w-7 h-7 object-contain brightness-0 invert" />
+              <img src="/assets/images/redgo-toast-logo.png" alt="Fresly" className="w-7 h-7 object-contain brightness-0 invert" />
             </div>
           </div>
           <div className="flex-1 pr-1 min-w-0">
@@ -374,7 +374,7 @@ function UserLayoutContent() {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       sessionStorage.removeItem("homeScrollY");
       sessionStorage.removeItem("homeVisibleCount");
-      // F5 keeps sticky delivery location — don't flash "Fetching Location..."
+      // F5 keeps sticky delivery location â€” don't flash "Fetching Location..."
       // from a prior manual select flag. Fresh tab open / login still fetch normally.
       sessionStorage.removeItem("manual_location_update");
       setShowGlobalLoader(false);
@@ -430,7 +430,7 @@ function UserLayoutContent() {
       rememberCategoryKeepAliveSlug(categorySlug);
       return;
     }
-    // Keep category page mounted under restaurant OR home tabs — instant reopen.
+    // Keep category page mounted under restaurant OR home tabs â€” instant reopen.
     // Only tear down when leaving both (e.g. search / other non-tab routes).
     if (!isRestaurantPath && !pathMainTab) {
       setCategoryBrowseMounted(false);
@@ -452,7 +452,7 @@ function UserLayoutContent() {
     const rootPaths = ["/", "/user", "/food", "/dining", "/user/dining", "/takeaway", "/user/takeaway"];
     const isAtRoot = rootPaths.includes(location.pathname);
 
-    // Main tab switches restore scroll via MainTabKeepAlive — don't reset here.
+    // Main tab switches restore scroll via MainTabKeepAlive â€” don't reset here.
     if (isExactMainTabPath(location.pathname)) return;
 
     if (navigationType !== 'POP' && !isAtRoot && !location.pathname.includes('/search')) {
@@ -479,7 +479,7 @@ function UserLayoutContent() {
               <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#DC2626] to-[#991B1B] flex items-center justify-center p-1.5 shadow-lg">
                 <img 
                   src="/assets/images/redgo-toast-logo.png" 
-                  alt="RedGo" 
+                  alt="Fresly" 
                   className="w-full h-full object-contain brightness-0 invert" 
                 />
               </div>

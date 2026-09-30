@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+﻿import { useState, useEffect, useRef } from "react"
 import { useNavigate, Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { Loader2, Pencil, X, ShieldCheck } from "lucide-react"
@@ -750,7 +750,7 @@ export default function DeliverySignIn() {
           <div className="mb-5 text-center flex flex-col items-center">
             <img
               src="/redgo_logo_transparent.png"
-              alt="RedGo Logo"
+              alt="Fresly Logo"
               className="h-28 -mb-3.5 object-contain drop-shadow-md"
             />
             <h2 className="text-[25px] font-extrabold bg-gradient-to-r from-[#0E4B9C] to-[#06336B] dark:from-blue-400 dark:to-blue-600 bg-clip-text text-transparent tracking-tight font-['Outfit'] pb-0.5">
@@ -906,7 +906,7 @@ export default function DeliverySignIn() {
                               onKeyDown={(e) => handleKeyDown(index, e)}
                               onPaste={index === 0 ? handlePaste : undefined}
                               className={`w-14 h-14 sm:w-16 sm:h-16 text-center text-2xl font-bold bg-gray-50 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-sm rounded-[20px] outline-none transition-all duration-300 text-gray-900 dark:text-white focus:bg-white dark:focus:bg-gray-900 focus:border-[#0E4B9C] focus:ring-4 focus:ring-[#0E4B9C]/10 hover:border-gray-400 ${blockTimer > 0 ? "opacity-50 cursor-not-allowed border-red-400 bg-red-50 text-red-800" : ""}`}
-                              placeholder="•"
+                              placeholder="â€¢"
                             />
                           ))}
                         </div>
@@ -1017,7 +1017,7 @@ export default function DeliverySignIn() {
                 >
                   TERMS
                 </Link>
-                <span className="mx-2 text-gray-400/80 font-bold">•</span>
+                <span className="mx-2 text-gray-400/80 font-bold">â€¢</span>
                 <Link
                   to="/food/delivery/privacy"
                   state={{ from: "/food/delivery/login" }}
@@ -1026,7 +1026,7 @@ export default function DeliverySignIn() {
                 >
                   PRIVACY
                 </Link>
-                <span className="mx-2 text-gray-400/80 font-bold">•</span>
+                <span className="mx-2 text-gray-400/80 font-bold">â€¢</span>
                 <Link
                   to="/food/delivery/help/content"
                   state={{ from: "/food/delivery/login" }}

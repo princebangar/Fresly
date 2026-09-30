@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, Suspense, lazy } from "react"
+﻿import React, { useEffect, useLayoutEffect, Suspense, lazy } from "react"
 import { Routes, Route, Navigate, useLocation, useNavigate, useNavigationType } from "react-router-dom"
 import ProtectedRoute from "@food/components/ProtectedRoute"
 import AuthRedirect from "@food/components/AuthRedirect"
@@ -73,8 +73,8 @@ function UserPathRedirect() {
   return <Navigate to={newPath} replace />
 }
 
-// Scroll to top on forward navigations only — keep / restore position on back (POP).
-// Main tabs + category browse own their scroll (KeepAlive) — never fight them here.
+// Scroll to top on forward navigations only â€” keep / restore position on back (POP).
+// Main tabs + category browse own their scroll (KeepAlive) â€” never fight them here.
 function ScrollToTop() {
   const { pathname } = useLocation();
   const navigationType = useNavigationType();
@@ -89,7 +89,7 @@ function ScrollToTop() {
     const isCategory = !!getCategorySlugFromPath(pathname);
     const isMainTab = isExactMainTabPath(pathname);
 
-    // KeepAlive / page restore owns these surfaces — jumping here steals taps.
+    // KeepAlive / page restore owns these surfaces â€” jumping here steals taps.
     if (isMainTab || isCategory) {
       if (navigationType === "POP" && isCategory) {
         try {
@@ -102,7 +102,7 @@ function ScrollToTop() {
             Number.isFinite(Number(mem.scrollY)) &&
             Number(mem.scrollY) >= 0
           ) {
-            // Same browse session (any category slug) — seed once; lock finishes it.
+            // Same browse session (any category slug) â€” seed once; lock finishes it.
             window.scrollTo({
               top: Number(mem.scrollY),
               left: 0,
@@ -150,7 +150,7 @@ function ScrollToTop() {
       return;
     }
 
-    // Category chip switches use REPLACE — do not yank scroll (breaks taps).
+    // Category chip switches use REPLACE â€” do not yank scroll (breaks taps).
     if (navigationType === "REPLACE") return;
 
     window.scrollTo(0, 0);
@@ -237,7 +237,7 @@ export default function App() {
     return () => window.removeEventListener("userLoginSuccess", onLoginSuccess)
   }, [])
 
-  // Global Auth Failure Listener EXACTLY like Redgo
+  // Global Auth Failure Listener EXACTLY like Fresly
   useEffect(() => {
     const handleAuthFailure = (event) => {
       const module = event.detail?.module || 'user'
@@ -257,7 +257,7 @@ export default function App() {
     }
 
     const handleStorageChange = (e) => {
-      // Cross-tab instant logout (Redgo v2 upgrade)
+      // Cross-tab instant logout (Fresly v2 upgrade)
       if ((e.key === "restaurant_accessToken" || e.key === "delivery_accessToken") && !e.newValue) {
         const module = e.key === "restaurant_accessToken" ? "restaurant" : "delivery"
         const loginPaths = {

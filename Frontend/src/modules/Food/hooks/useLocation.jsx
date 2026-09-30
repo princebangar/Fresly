@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react"
+﻿import { useState, useEffect, useRef, useMemo } from "react"
 import { locationAPI, userAPI } from "@food/api"
 import { useProfile } from "@food/context/ProfileContext"
 import apiClient from "@food/api/axios"
@@ -16,7 +16,7 @@ const loadCustomizationSettings = async () => {
 
   // Try loading from localStorage first
   try {
-    const saved = localStorage.getItem("redgo_customization_settings")
+    const saved = localStorage.getItem("fresly_customization_settings")
     if (saved) {
       globalCustomizationSettings = JSON.parse(saved)
     }
@@ -30,7 +30,7 @@ const loadCustomizationSettings = async () => {
       if (settings) {
         globalCustomizationSettings = settings
         try {
-          localStorage.setItem("redgo_customization_settings", JSON.stringify(settings))
+          localStorage.setItem("fresly_customization_settings", JSON.stringify(settings))
         } catch (e) {}
         // Fire a custom event to notify components that customization settings have loaded
         window.dispatchEvent(new CustomEvent("customizationSettingsLoaded"))
@@ -97,7 +97,7 @@ const SERVICE_CITIES = [
 ]
 
 /**
- * Prefer metro/service city over village/locality (e.g. Dhabli → Indore)
+ * Prefer metro/service city over village/locality (e.g. Dhabli â†’ Indore)
  * so restaurant APIs filtered by city don't return empty lists.
  */
 export function resolveServiceCity({
@@ -311,7 +311,7 @@ export const hasValidStoredUserLocation = () => {
   }
 }
 
-/** Persisted after user grants GPS once — avoids re-showing in-app location popup. */
+/** Persisted after user grants GPS once â€” avoids re-showing in-app location popup. */
 export const LOCATION_PERMISSION_GRANTED_KEY = "locationPermissionGranted"
 
 export const isLocationPermissionGranted = () => {
@@ -355,7 +355,7 @@ const AUTO_LOCATION_REFRESH_COOLDOWN_MS = 15_000
 let lastAutoLocationRefreshAt = 0
 
 /** Marks an active tab after boot; not used alone for stickiness (Chrome can restore it). */
-export const LOCATION_APP_SESSION_KEY = "redgo_location_session"
+export const LOCATION_APP_SESSION_KEY = "fresly_location_session"
 
 function isBrowserPageReload() {
   try {
@@ -370,8 +370,8 @@ function isBrowserPageReload() {
 
 /**
  * Stick selected delivery location only on F5/reload.
- * New tab / cold open / reopened closed tab → force current GPS
- * (sessionStorage alone is unreliable — Chrome often restores it on reopen).
+ * New tab / cold open / reopened closed tab â†’ force current GPS
+ * (sessionStorage alone is unreliable â€” Chrome often restores it on reopen).
  * @returns {{ isNewAppSession: boolean }}
  */
 function bootstrapLocationModeOnAppOpen() {
@@ -418,7 +418,7 @@ export function useLocation() {
 
   const [isDefaultLocationMode, setIsDefaultLocationMode] = useState(() => {
     try {
-      const saved = localStorage.getItem("redgo_customization_settings")
+      const saved = localStorage.getItem("fresly_customization_settings")
       if (saved) {
         return JSON.parse(saved).default_location_enabled === true
       }
@@ -431,11 +431,11 @@ export function useLocation() {
       const cached = localStorage.getItem("userLocation")
       if (cached) return JSON.parse(cached)
       
-      const savedSettings = localStorage.getItem("redgo_customization_settings")
+      const savedSettings = localStorage.getItem("fresly_customization_settings")
       const isEnabled = savedSettings ? JSON.parse(savedSettings).default_location_enabled === true : false
       return isEnabled ? TEMPORARY_DEFAULT_INDORE_LOCATION : null
     } catch {
-      const savedSettings = localStorage.getItem("redgo_customization_settings")
+      const savedSettings = localStorage.getItem("fresly_customization_settings")
       const isEnabled = savedSettings ? JSON.parse(savedSettings).default_location_enabled === true : false
       return isEnabled ? TEMPORARY_DEFAULT_INDORE_LOCATION : null
     }
@@ -445,7 +445,7 @@ export function useLocation() {
   useEffect(() => {
     const handleSettingsLoaded = () => {
       try {
-        const saved = localStorage.getItem("redgo_customization_settings")
+        const saved = localStorage.getItem("fresly_customization_settings")
         if (saved) {
           const enabled = JSON.parse(saved).default_location_enabled === true
           setIsDefaultLocationMode(enabled)
@@ -1245,7 +1245,7 @@ export function useLocation() {
               })
 
               // Validate coordinates are in India range BEFORE attempting geocoding
-              // India: Latitude 6.5� to 37.1� N, Longitude 68.7� to 97.4� E
+              // India: Latitude 6.5ï¿½ to 37.1ï¿½ N, Longitude 68.7ï¿½ to 97.4ï¿½ E
               let finalLat = latitude
               let finalLng = longitude
               const isInIndiaRange = latitude >= 6.5 && latitude <= 37.1 && longitude >= 68.7 && longitude <= 97.4 && longitude > 0
@@ -1554,7 +1554,7 @@ export function useLocation() {
             retryCount = 0
 
             // Validate coordinates are in India range BEFORE attempting geocoding
-            // India: Latitude 6.5� to 37.1� N, Longitude 68.7� to 97.4� E
+            // India: Latitude 6.5ï¿½ to 37.1ï¿½ N, Longitude 68.7ï¿½ to 97.4ï¿½ E
             const isInIndiaRange = latitude >= 6.5 && latitude <= 37.1 && longitude >= 68.7 && longitude <= 97.4 && longitude > 0
 
             // "Geocode once" mode:
@@ -1980,7 +1980,7 @@ export function useLocation() {
       })
     }, 5000) // 5 second safety timeout
 
-    // Fresh tab/app open → silent fresh GPS (keep cached coords visible; no popup flash).
+    // Fresh tab/app open â†’ silent fresh GPS (keep cached coords visible; no popup flash).
     const startAutoLocationRefresh = () => {
       runDedupedAutoRefresh(() =>
         refreshLocationIfPermitted({ showLoading: false, forceFresh: true }),
@@ -2000,7 +2000,7 @@ export function useLocation() {
       setLoading(false)
     }
 
-    // App resume from background (Android/iOS WebView) → refresh GPS silently if already allowed.
+    // App resume from background (Android/iOS WebView) â†’ refresh GPS silently if already allowed.
     let hiddenAt = null
     const APP_RESUME_REFRESH_MS = 5_000
 
@@ -2164,7 +2164,7 @@ export function useLocation() {
   /**
    * Fast path for Address Selector "Use current location".
    * - Does not clear cache first
-   * - Prefers recent GPS (≤30s) + low-accuracy first (much faster)
+   * - Prefers recent GPS (â‰¤30s) + low-accuracy first (much faster)
    * - Single reverse-geocode, DB update in background
    */
   const requestLocationFast = async () => {

@@ -1,4 +1,4 @@
-// src/modules/Food/context/CartContext.jsx
+﻿// src/modules/Food/context/CartContext.jsx
 import {
   createContext,
   useContext,
@@ -769,7 +769,7 @@ export function CartProvider({ children }) {
     () => ({
       _isProvider: true,
       cart: normalizedCart,
-      // Redgo compatibility: delivery/takeaway share the same server cart when logged in.
+      // Fresly compatibility: delivery/takeaway share the same server cart when logged in.
       deliveryCart: normalizedCart,
       takeawayCart: normalizedCart,
       items: cartForAnimation.items,
@@ -823,7 +823,7 @@ export function useCart() {
   const context = useContext(CartContext)
   if (!context || context._isProvider !== true) {
     if (process.env.NODE_ENV === "development") {
-      debugWarn("⚠️ useCart called outside CartProvider. Using default values.")
+      debugWarn("âš ï¸ useCart called outside CartProvider. Using default values.")
     }
     return defaultCartContext
   }

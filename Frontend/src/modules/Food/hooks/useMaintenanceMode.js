@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+﻿import { useCallback, useEffect, useRef, useState } from "react";
 import apiClient from "@food/api/axios";
 import { shouldEnforceMaintenanceOnClient } from "@food/utils/maintenanceEnv";
 
@@ -22,11 +22,11 @@ export function useMaintenanceMode({ active = true } = {}) {
       setEnabled(next);
 
       try {
-        const raw = localStorage.getItem("redgo_customization_settings");
+        const raw = localStorage.getItem("fresly_customization_settings");
         const parsed = raw ? JSON.parse(raw) : {};
         // Keep the real DB flag in cache; UI lock only follows `next`.
         localStorage.setItem(
-          "redgo_customization_settings",
+          "fresly_customization_settings",
           JSON.stringify({
             ...parsed,
             maintenance_mode_enabled: value === true,

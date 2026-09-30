@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { MapPin, ChevronDown, Wallet } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useProfile } from "@food/context/ProfileContext";
@@ -7,7 +7,7 @@ import outOfZoneBg from '@food/assets/Outofzone_bg.jpg';
 
 const OutOfZoneScreen = ({ location, handleLocationClick }) => {
   const { userProfile } = useProfile();
-  const BRAND_NAME = "RedGo"; // Change this for different projects
+  const BRAND_NAME = "Fresly"; // Change this for different projects
 
   const routerLocation = useLocation();
   const initials = React.useMemo(() => {
@@ -84,7 +84,7 @@ const OutOfZoneScreen = ({ location, handleLocationClick }) => {
       <div className="absolute top-[48vh] left-0 w-full -translate-y-1/2 flex flex-col items-center z-10 px-6">
         <div className="text-center">
           <h2 className="text-[28px] font-bold text-white leading-[1.2] mb-4 tracking-tight drop-shadow-md">
-            We'll be there soon –<br />hang tight!
+            We'll be there soon â€“<br />hang tight!
           </h2>
           <p className="text-[16px] font-medium text-white/90 leading-[1.5] max-w-[320px] mx-auto drop-shadow-sm">
             Looks like online ordering isn't available<br />at your location yet.

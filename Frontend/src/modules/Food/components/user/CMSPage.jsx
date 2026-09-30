@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+﻿import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { ArrowLeft, Lock, Loader2, Mail, Phone, MessageSquare, Clock, ShieldCheck } from "lucide-react"
 import { motion } from "framer-motion"
@@ -112,7 +112,7 @@ export default function CMSPage({
             <h1 className="text-xl md:text-2xl font-black text-gray-900 dark:text-white tracking-tight leading-none">
               {pageData.title || defaultTitle}
             </h1>
-            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">RedGo Information</p>
+            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Fresly Information</p>
           </div>
         </div>
       </div>
@@ -134,10 +134,10 @@ export default function CMSPage({
                   Email Us
                 </h3>
                 <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-                  {pageData.email || "support@redgo.com"}
+                  {pageData.email || "support@fresly.com"}
                 </p>
                 <a
-                  href={`mailto:${pageData.email || "support@redgo.com"}`}
+                  href={`mailto:${pageData.email || "support@fresly.com"}`}
                   className="mt-4 text-xs font-black text-[#CB202D] uppercase tracking-widest hover:underline"
                 >
                   Send Message
@@ -183,7 +183,7 @@ export default function CMSPage({
             )
           )}
 
-          {/* FAQ + Info Cards — Support pages only */}
+          {/* FAQ + Info Cards â€” Support pages only */}
           {isSupport && (
             <div className={`${hasActualContent ? "mt-12" : "mt-0"} pt-10 border-t border-gray-100 dark:border-gray-900`}>
               <h2 className="text-xl font-black text-gray-900 dark:text-white mb-8 tracking-tight">
@@ -295,7 +295,7 @@ export default function CMSPage({
         <p className="text-center mt-10 text-[10px] text-gray-400 font-black uppercase tracking-[0.2em] leading-relaxed">
           Last updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}{" "}
           <br />
-          © {new Date().getFullYear()} RedGo. All Rights Reserved.
+          Â© {new Date().getFullYear()} Fresly. All Rights Reserved.
         </p>
       </div>
     </AnimatedPage>
