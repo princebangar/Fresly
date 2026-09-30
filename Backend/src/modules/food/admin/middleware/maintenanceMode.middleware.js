@@ -1,4 +1,4 @@
-import {
+﻿import {
   isMaintenanceModeEnabled,
 } from '../services/maintenanceMode.service.js';
 import { verifyAccessToken } from '../../../../core/auth/token.util.js';
@@ -43,7 +43,7 @@ function isLocalDevClient(req) {
   if (refererHost && LOCAL_HOST_RE.test(refererHost)) return true;
 
   // Optional explicit marker from local axios (harmless if spoofed; Origin is primary)
-  const marker = String(req.headers['x-redgo-client'] || '').toLowerCase();
+  const marker = String(req.headers['x-fresly-client'] || '').toLowerCase();
   if (marker === 'local-dev') return true;
 
   return false;

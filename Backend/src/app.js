@@ -1,4 +1,4 @@
-import express from 'express';
+﻿import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -49,10 +49,10 @@ app.use(helmet({
     crossOriginResourcePolicy: { policy: 'cross-origin' }
 }));
 const allowedOrigins = [
-    'https://redgo.in',
-    'https://www.redgo.in',
-    'https://redgoindia.cloud',
-    'https://www.redgoindia.cloud',
+    'https://fresly.in',
+    'https://www.fresly.in',
+    'https://freslyindia.cloud',
+    'https://www.freslyindia.cloud',
     'http://localhost:5173',
     'http://localhost:3000'
 ];
@@ -74,7 +74,7 @@ if (config.nodeEnv !== 'production') {
 }
 app.use(express.json({
     verify: (req, res, buf) => {
-        // ✅ Store rawBody for signature verification (Razorpay Webhooks)
+        // âœ… Store rawBody for signature verification (Razorpay Webhooks)
         if (req.originalUrl && req.originalUrl.includes('/webhook/razorpay')) {
             req.rawBody = buf;
         }
@@ -91,8 +91,8 @@ app.use((req, _res, next) => {
 });
 app.use(xssClean());
 
-// Uploads are served by nginx straight off disk in production (see deploy/nginx/redgo.conf).
-// This static mount is the dev fallback only — SERVE_UPLOADS_FROM_NODE=true forces it on.
+// Uploads are served by nginx straight off disk in production (see deploy/nginx/fresly.conf).
+// This static mount is the dev fallback only â€” SERVE_UPLOADS_FROM_NODE=true forces it on.
 if (config.serveUploadsFromNode) {
     app.use(
         '/uploads',
@@ -104,7 +104,7 @@ if (config.serveUploadsFromNode) {
     );
 }
 
-// Rate limit: public free · auth routes use authRateLimiter · private = user+IP
+// Rate limit: public free Â· auth routes use authRateLimiter Â· private = user+IP
 app.use('/api', apiRateLimitMiddleware);
 
 // Optional: log API response time (method, path, status, duration) - no sensitive data

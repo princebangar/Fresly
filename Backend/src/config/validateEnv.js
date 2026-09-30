@@ -1,4 +1,4 @@
-import { config } from './env.js';
+﻿import { config } from './env.js';
 import { logger } from '../utils/logger.js';
 
 /**
@@ -30,7 +30,7 @@ export const validateConfig = () => {
     if (config.nodeEnv === 'production') {
         const assetBase = String(process.env.ASSET_BASE_URL || process.env.API_BASE_URL || '').trim();
         if (!assetBase) {
-            missing.push('ASSET_BASE_URL (e.g. https://redgo.in — stored in every image URL)');
+            missing.push('ASSET_BASE_URL (e.g. https://fresly.in â€” stored in every image URL)');
         } else if (!/^https:\/\//i.test(assetBase)) {
             missing.push(`ASSET_BASE_URL must be an https:// origin (got "${assetBase}")`);
         } else if (/localhost|127\.0\.0\.1/i.test(assetBase)) {

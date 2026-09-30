@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+﻿import crypto from 'crypto';
 import ms from 'ms';
 import { FoodOtp } from './otp.model.js';
 import { config } from '../../config/env.js';
@@ -23,9 +23,9 @@ const sendSmsViaIndiaHub = async (phone, otp) => {
 
         // EXACT DLT TEMPLATE provided by user:
         // "Welcome to the ##var## powered by SMSINDIAHUB. Your OTP for registration is ##var##"
-        const message = `Welcome to the RedGo. Your OTP for registration is ${otp}`;
+        const message = `Welcome to the Fresly. Your OTP for registration is ${otp}`;
 
-        // SMS India Hub HTTP GET API — query param names are case-sensitive per SOP
+        // SMS India Hub HTTP GET API â€” query param names are case-sensitive per SOP
         const url = new URL('http://cloud.smsindiahub.in/vendorsms/pushsms.aspx');
         url.searchParams.append('APIKey', config.smsApiKey);
         url.searchParams.append('sid', config.smsSenderId);
@@ -45,7 +45,7 @@ const sendSmsViaIndiaHub = async (phone, otp) => {
         const resultText = await response.text();
         logger.info(`[SMS] Raw response for ${msisdn}: ${resultText}`);
 
-        // SMS India Hub often returns HTTP 200 OK even for errors — check response body
+        // SMS India Hub often returns HTTP 200 OK even for errors â€” check response body
         let parsed = null;
         try { parsed = JSON.parse(resultText); } catch (_) { /* plain text response is OK */ }
 
@@ -53,19 +53,19 @@ const sendSmsViaIndiaHub = async (phone, otp) => {
             const errMsg = `SMS India Hub ERROR for ${phone}: [${parsed.ErrorCode}] ${parsed.ErrorMessage || resultText}`;
             logger.error(errMsg);
             // eslint-disable-next-line no-console
-            console.error(`❌ [SMS ERROR] ${errMsg}`);
+            console.error(`âŒ [SMS ERROR] ${errMsg}`);
             if (parsed.ErrorCode === '006') {
                 // eslint-disable-next-line no-console
-                console.error('❌ [SMS ERROR] ErrorCode 006 = DLT Template mismatch. The message text must EXACTLY match your registered TRAI DLT template. Login to https://cloud.smsindiahub.in and verify the approved template text.');
+                console.error('âŒ [SMS ERROR] ErrorCode 006 = DLT Template mismatch. The message text must EXACTLY match your registered TRAI DLT template. Login to https://cloud.smsindiahub.in and verify the approved template text.');
             }
         } else if (!response.ok) {
-            logger.error(`SMS API HTTP error for ${phone}: ${response.status} – ${resultText}`);
+            logger.error(`SMS API HTTP error for ${phone}: ${response.status} â€“ ${resultText}`);
         } else {
-            logger.info(`✅ SMS sent successfully to ${msisdn}`);
+            logger.info(`âœ… SMS sent successfully to ${msisdn}`);
         }
     } catch (error) {
         logger.error(`Error sending SMS to ${phone}: ${error.message}`);
-        // Do NOT throw — OTP is already stored in DB; SMS failure should not block the flow
+        // Do NOT throw â€” OTP is already stored in DB; SMS failure should not block the flow
     }
 };
 
@@ -105,15 +105,15 @@ const sendSmsViaMsg91 = async (phone, otp) => {
             const errMsg = `MSG91 ERROR for ${phone}: ${parsed.message || resultText}`;
             logger.error(errMsg);
             // eslint-disable-next-line no-console
-            console.error(`❌ [SMS ERROR] ${errMsg}`);
+            console.error(`âŒ [SMS ERROR] ${errMsg}`);
         } else if (!response.ok) {
-            logger.error(`MSG91 API HTTP error for ${phone}: ${response.status} – ${resultText}`);
+            logger.error(`MSG91 API HTTP error for ${phone}: ${response.status} â€“ ${resultText}`);
         } else {
-            logger.info(`✅ MSG91 SMS sent successfully to ${msisdn}`);
+            logger.info(`âœ… MSG91 SMS sent successfully to ${msisdn}`);
         }
     } catch (error) {
         logger.error(`Error sending SMS via MSG91 to ${phone}: ${error.message}`);
-        // Do NOT throw — OTP is already stored in DB; SMS failure should not block the flow
+        // Do NOT throw â€” OTP is already stored in DB; SMS failure should not block the flow
     }
 };
 
@@ -181,14 +181,14 @@ export const createOrUpdateOtp = async (phone) => {
     let otp;
     // if (config.useDefaultOtp) {
     //     otp = '1234';
-    //     logger.info(`Default OTP mode enabled – OTP is ${otp} for phone ${normalizedPhone}`);
+    //     logger.info(`Default OTP mode enabled â€“ OTP is ${otp} for phone ${normalizedPhone}`);
     // } else {
     //     otp = generateOtpCode();
     // }
     if (useStaticOtp) {
         otp = '1234';
         logger.info(
-            `${config.useDefaultOtp ? 'Default OTP mode' : 'Default test phone'} enabled – OTP is ${otp} for phone ${normalizedPhone}`
+            `${config.useDefaultOtp ? 'Default OTP mode' : 'Default test phone'} enabled â€“ OTP is ${otp} for phone ${normalizedPhone}`
         );
     } else {
         otp = generateOtpCode();
@@ -252,7 +252,7 @@ export const verifyOtp = async (phone, otp, preserveOtp = false) => {
     // Also bypass for DEFAULT_TEST_PHONE when USE_DEFAULT_TEST_PHONE=true.
     // if (config.useDefaultOtp && otp === '1234') {
     if (shouldUseStaticOtp(normalizedPhone) && otp === '1234') {
-        console.info(`✅ [OTP-Verify] Static OTP '1234' ABSOLUTE BYPASS for ${phone}`);
+        console.info(`âœ… [OTP-Verify] Static OTP '1234' ABSOLUTE BYPASS for ${phone}`);
         if (record && !preserveOtp) {
             await record.deleteOne(); // Reset the request limit for successful logins
         } else if (record && preserveOtp) {
@@ -266,7 +266,7 @@ export const verifyOtp = async (phone, otp, preserveOtp = false) => {
     }
 
     if (!record) {
-        console.warn(`❌ [OTP-Verify] No OTP record found for ${normalizedPhone}`);
+        console.warn(`âŒ [OTP-Verify] No OTP record found for ${normalizedPhone}`);
         return { valid: false, reason: 'OTP not found. Please request a new OTP.' };
     }
 
@@ -318,10 +318,10 @@ export const verifyOtp = async (phone, otp, preserveOtp = false) => {
     record.requestCount = 1; // Reset request count for live OTPs
 
     if (!preserveOtp) {
-        console.info(`✅ [OTP-Verify] OTP verified and deleted for ${normalizedPhone}`);
+        console.info(`âœ… [OTP-Verify] OTP verified and deleted for ${normalizedPhone}`);
         await record.deleteOne();
     } else {
-        console.info(`✅ [OTP-Verify] OTP verified and preserved for ${normalizedPhone}`);
+        console.info(`âœ… [OTP-Verify] OTP verified and preserved for ${normalizedPhone}`);
         await record.save();
     }
     return { valid: true };

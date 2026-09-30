@@ -1,5 +1,5 @@
-/**
- * PM2 ecosystem for RedGo API + BullMQ workers.
+﻿/**
+ * PM2 ecosystem for Fresly API + BullMQ workers.
  *
  * Usage (on live server, from Backend folder):
  *   pm2 start ecosystem.config.cjs
@@ -13,7 +13,7 @@
 module.exports = {
   apps: [
     {
-      name: 'redgo-v2',
+      name: 'fresly-v2',
       script: 'server.js',
       cwd: __dirname,
       instances: 1,
@@ -27,7 +27,7 @@ module.exports = {
       },
     },
     {
-      name: 'redgo-worker-order',
+      name: 'fresly-worker-order',
       script: 'src/queues/workers/order.worker.js',
       cwd: __dirname,
       instances: 1,
@@ -38,7 +38,7 @@ module.exports = {
       env: { NODE_ENV: 'production' },
     },
     {
-      name: 'redgo-worker-payment',
+      name: 'fresly-worker-payment',
       script: 'src/queues/workers/payment.worker.js',
       cwd: __dirname,
       instances: 1,
@@ -49,7 +49,7 @@ module.exports = {
       env: { NODE_ENV: 'production' },
     },
     {
-      name: 'redgo-worker-notification',
+      name: 'fresly-worker-notification',
       script: 'src/queues/workers/notification.worker.js',
       cwd: __dirname,
       instances: 1,
@@ -60,7 +60,7 @@ module.exports = {
       env: { NODE_ENV: 'production' },
     },
     {
-      name: 'redgo-worker-tracking',
+      name: 'fresly-worker-tracking',
       script: 'src/queues/workers/tracking.worker.js',
       cwd: __dirname,
       instances: 1,
@@ -71,7 +71,7 @@ module.exports = {
       env: { NODE_ENV: 'production' },
     },
     {
-      name: 'redgo-worker-otp',
+      name: 'fresly-worker-otp',
       script: 'src/queues/workers/otp.worker.js',
       cwd: __dirname,
       instances: 1,
