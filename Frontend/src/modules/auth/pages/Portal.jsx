@@ -1,4 +1,4 @@
-import React from "react"
+﻿import React from "react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import { UtensilsCrossed, ShoppingBasket, Car, Bed, ArrowRight, ShieldCheck, Star } from "lucide-react"
@@ -13,7 +13,7 @@ const SERVICES = [
     icon: UtensilsCrossed,
     color: "from-[#FF4D4D] to-[#CB202D]",
     badge: "Fast",
-    badgeIcon: "⚡"
+    badgeIcon: "âš¡"
   },
   {
     id: "grocery",
@@ -24,7 +24,7 @@ const SERVICES = [
     icon: ShoppingBasket,
     color: "from-[#4CAF50] to-[#2DAB52]",
     badge: "Instant",
-    badgeIcon: "⏱️"
+    badgeIcon: "â±ï¸"
   },
   {
     id: "taxi",
@@ -35,7 +35,7 @@ const SERVICES = [
     icon: Car,
     color: "from-[#333333] to-[#000000]",
     badge: "Safe",
-    badgeIcon: "🛡️"
+    badgeIcon: "ðŸ›¡ï¸"
   },
   {
     id: "hotel",
@@ -46,7 +46,7 @@ const SERVICES = [
     icon: Bed,
     color: "from-[#64B5F6] to-[#4A90E2]",
     badge: "Premium",
-    badgeIcon: "💎"
+    badgeIcon: "ðŸ’Ž"
   }
 ]
 
@@ -117,7 +117,7 @@ export default function SuperAppPortal() {
           className="text-5xl md:text-7xl font-black text-[#1A202C] tracking-tight leading-none"
         >
           Welcome to <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DC2626] via-[#f87171] to-[#DC2626] bg-[length:200%_auto] animate-gradient block mt-2">RedGo</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DC2626] via-[#f87171] to-[#DC2626] bg-[length:200%_auto] animate-gradient block mt-2">Fresly</span>
         </motion.h1>
 
         <motion.p 
@@ -243,7 +243,7 @@ export default function SuperAppPortal() {
       <div className="mt-16 flex flex-col items-center gap-3 opacity-50">
          <div className="flex items-center gap-1.5 grayscale">
             <ShieldCheck className="w-4 h-4" />
-            <span className="text-[10px] font-black uppercase tracking-widest">Secure by RedGo</span>
+            <span className="text-[10px] font-black uppercase tracking-widest">Secure by Fresly</span>
          </div>
       </div>
     </div>

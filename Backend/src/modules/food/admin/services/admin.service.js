@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+﻿import mongoose from 'mongoose';
 import { ValidationError, NotFoundError } from '../../../../core/auth/errors.js';
 import { logger } from '../../../../utils/logger.js';
 import { FoodRestaurant } from '../../restaurant/models/restaurant.model.js';
@@ -252,7 +252,7 @@ export async function globalSearch(query = '') {
         id: i._id,
         type: 'Product',
         title: i.name,
-        description: `Price: â‚¹${i.price}`,
+        description: `Price: Ã¢â€šÂ¹${i.price}`,
         path: `/admin/food/foods?productId=${i._id}`
     }));
 
@@ -268,7 +268,7 @@ export async function globalSearch(query = '') {
         id: a._id,
         type: 'Addon',
         title: a.name,
-        description: `Price: â‚¹${a.price}`,
+        description: `Price: Ã¢â€šÂ¹${a.price}`,
         path: `/admin/food/addons`
     }));
 
@@ -403,9 +403,9 @@ export async function getRestaurants(query) {
 
 
 const CANCELLED_ORDER_STATUSES = ['cancelled_by_user', 'cancelled_by_restaurant', 'cancelled_by_admin'];
-// Broad "in progress" set used by live activity / charts — not the Pending Orders card.
+// Broad "in progress" set used by live activity / charts â€” not the Pending Orders card.
 const PENDING_ORDER_STATUSES = ['created', 'confirmed', 'preparing', 'ready_for_pickup', 'picked_up'];
-// Must match admin Pending Orders page (`listOrdersAdmin` status=pending → orderStatus=created).
+// Must match admin Pending Orders page (`listOrdersAdmin` status=pending â†’ orderStatus=created).
 const DASHBOARD_PENDING_ORDER_STATUSES = ['created'];
 // Confirmed + kitchen stages (pending page is only brand-new `created` orders).
 const DASHBOARD_PROCESSING_ORDER_STATUSES = ['confirmed', 'preparing', 'ready_for_pickup'];
@@ -780,7 +780,7 @@ export async function getDashboardStats(query = {}) {
         FoodAddon.countDocuments({ approvalStatus: 'approved', isDeleted: { $ne: true }, ...zoneScopedRestaurantMatch }),
         // Total Customers is always the count of all registered users. A customer is
         // not tied to a zone (they can order from anywhere), so the zone filter does
-        // not apply here — it stays the same across all zones.
+        // not apply here â€” it stays the same across all zones.
         FoodUser.countDocuments({}),
         FoodRestaurant.find({ ...restaurantMatch, status: 'pending' }).sort({ createdAt: -1 }).limit(5).select('restaurantName createdAt').lean(),
         FoodDeliveryPartner.find({ status: 'pending' }).sort({ createdAt: -1 }).limit(5).select('name createdAt').lean(),
@@ -1166,7 +1166,7 @@ export async function getTransactionReport(query = {}) {
         ) {
             return 'Pending';
         }
-        // Paid online / wallet but not delivered yet — still in progress
+        // Paid online / wallet but not delivered yet â€” still in progress
         if (pay === 'paid' || pay === 'authorized' || txStatus === 'captured' || txStatus === 'settled') {
             return 'Processing';
         }
@@ -3249,7 +3249,7 @@ export async function updateRestaurantStatus(id, body = {}) {
     ).lean();
 
     if (updated && isActive) {
-        logger.info(`[ADMIN-STATUS] Restaurant ${id} activated (ban/unban) — triggering approval email/FCM`);
+        logger.info(`[ADMIN-STATUS] Restaurant ${id} activated (ban/unban) â€” triggering approval email/FCM`);
         const isChangesApproval = existing.pendingApprovalType === 'changes';
         await sendRestaurantApprovalNotifications(updated, existing, isChangesApproval);
     }
@@ -3709,7 +3709,7 @@ export async function approveRestaurantAddon(addonId) {
             await notifyOwnersSafely(
                 [{ ownerType: 'RESTAURANT', ownerId: updated.restaurantId }],
                 {
-                    title: 'Addon Approved! ✅',
+                    title: 'Addon Approved! âœ…',
                     body: `Your addon "${updated.published?.name || 'New Addon'}" has been approved and is now live.`,
                     image: 'https://i.ibb.co/3m2Yh7r/Appzeto-Brand-Image.png',
                     sendToAllDevices: true,
@@ -3755,7 +3755,7 @@ export async function rejectRestaurantAddon(addonId, reason) {
             await notifyOwnersSafely(
                 [{ ownerType: 'RESTAURANT', ownerId: updated.restaurantId }],
                 {
-                    title: 'Addon Rejected ❌',
+                    title: 'Addon Rejected âŒ',
                     body: `Your addon request for "${updated.draft?.name || 'New Addon'}" was rejected. Reason: ${rejectionReason}`,
                     image: 'https://i.ibb.co/3m2Yh7r/Appzeto-Brand-Image.png',
                     sendToAllDevices: true,
@@ -4170,8 +4170,8 @@ async function sendRestaurantApprovalNotifications(restaurant, existing = {}, is
     const restaurantName = restaurant.restaurantName || existing.restaurantName || 'your restaurant';
 
     const pushTitle = isChangesApproval
-        ? 'Profile Changes Approved! ✅'
-        : 'Congratulations! 🎉';
+        ? 'Profile Changes Approved! âœ…'
+        : 'Congratulations! ðŸŽ‰';
     const pushBody = isChangesApproval
         ? `Your profile changes for "${restaurantName}" have been approved and are now live.`
         : `Your restaurant "${restaurantName}" has been approved. You can now start receiving orders!`;
@@ -4179,12 +4179,12 @@ async function sendRestaurantApprovalNotifications(restaurant, existing = {}, is
         ? '/food/restaurant'
         : '/food/restaurant/pending-verification';
 
-    logger.info(`[APPROVE-EMAIL] Restaurant ${restaurantId} — ownerEmail=${recipientEmail || 'MISSING'}`);
+    logger.info(`[APPROVE-EMAIL] Restaurant ${restaurantId} â€” ownerEmail=${recipientEmail || 'MISSING'}`);
 
     try {
         const { notifyOwnersSafely, listOwnerTokens } = await import('../../../../core/notifications/firebase.service.js');
         const tokens = await listOwnerTokens({ ownerType: 'RESTAURANT', ownerId: restaurant._id });
-        logger.info(`[APPROVE-FCM] Restaurant ${restaurantId} — deviceTokens=${tokens.length}${isChangesApproval ? ' (changes)' : ''}`);
+        logger.info(`[APPROVE-FCM] Restaurant ${restaurantId} â€” deviceTokens=${tokens.length}${isChangesApproval ? ' (changes)' : ''}`);
 
         const fcmResult = await notifyOwnersSafely(
             [{ ownerType: 'RESTAURANT', ownerId: restaurant._id }],
@@ -4204,13 +4204,13 @@ async function sendRestaurantApprovalNotifications(restaurant, existing = {}, is
         const delivered = Array.isArray(fcmResult)
             ? fcmResult.reduce((sum, item) => sum + (item?.successCount || 0), 0)
             : fcmResult?.successCount || 0;
-        logger.info(`[APPROVE-FCM] Restaurant ${restaurantId} — pushDelivered=${delivered}`);
+        logger.info(`[APPROVE-FCM] Restaurant ${restaurantId} â€” pushDelivered=${delivered}`);
     } catch (e) {
-        logger.error(`[APPROVE-FCM] Restaurant ${restaurantId} — FCM failed: ${e?.message || e}`);
+        logger.error(`[APPROVE-FCM] Restaurant ${restaurantId} â€” FCM failed: ${e?.message || e}`);
     }
 
     if (!recipientEmail) {
-        logger.warn(`[APPROVE-EMAIL] Restaurant ${restaurantId} — email skipped (no ownerEmail)`);
+        logger.warn(`[APPROVE-EMAIL] Restaurant ${restaurantId} â€” email skipped (no ownerEmail)`);
         return false;
     }
 
@@ -4223,13 +4223,13 @@ async function sendRestaurantApprovalNotifications(restaurant, existing = {}, is
             isChangesApproval
         });
         if (emailSent) {
-            logger.info(`[APPROVE-EMAIL] Restaurant ${restaurantId} — email sent to ${recipientEmail}`);
+            logger.info(`[APPROVE-EMAIL] Restaurant ${restaurantId} â€” email sent to ${recipientEmail}`);
         } else {
-            logger.warn(`[APPROVE-EMAIL] Restaurant ${restaurantId} — email FAILED for ${recipientEmail}`);
+            logger.warn(`[APPROVE-EMAIL] Restaurant ${restaurantId} â€” email FAILED for ${recipientEmail}`);
         }
         return emailSent;
     } catch (e) {
-        logger.error(`[APPROVE-EMAIL] Restaurant ${restaurantId} — email error: ${e?.message || e}`);
+        logger.error(`[APPROVE-EMAIL] Restaurant ${restaurantId} â€” email error: ${e?.message || e}`);
         return false;
     }
 }
@@ -4240,10 +4240,10 @@ async function sendDeliveryApprovalNotifications(partner, existing = {}, isChang
     const partnerName = partner.name || existing.name || 'Partner';
 
     const pushTitle = isChangesApproval
-        ? 'Profile Changes Approved! ✅'
-        : 'Welcome Aboard! 🛵';
+        ? 'Profile Changes Approved! âœ…'
+        : 'Welcome Aboard! ðŸ›µ';
     const pushBody = isChangesApproval
-        ? 'Your delivery profile changes have been approved. You can continue delivering with RedGo.'
+        ? 'Your delivery profile changes have been approved. You can continue delivering with Fresly.'
         : 'Your delivery partner application has been approved. You can now go online and start earning!';
     const targetUrl = isChangesApproval
         ? '/food/delivery'
@@ -4254,15 +4254,15 @@ async function sendDeliveryApprovalNotifications(partner, existing = {}, isChang
         recipientEmail = String(fresh?.email || '').trim().toLowerCase();
     }
 
-    logger.info(`[APPROVE-EMAIL] Delivery ${partnerId} — email=${recipientEmail || 'MISSING'}`);
+    logger.info(`[APPROVE-EMAIL] Delivery ${partnerId} â€” email=${recipientEmail || 'MISSING'}`);
 
     try {
         const { notifyOwnerSafely, listOwnerTokens } = await import('../../../../core/notifications/firebase.service.js');
         const tokens = await listOwnerTokens({ ownerType: 'DELIVERY_PARTNER', ownerId: partner._id });
-        logger.info(`[APPROVE-FCM] Delivery ${partnerId} — deviceTokens=${tokens.length}${tokens.length ? ` (platform fields: web+mobile)` : ' — NO TOKENS IN DB'}${isChangesApproval ? ' (changes)' : ''}`);
+        logger.info(`[APPROVE-FCM] Delivery ${partnerId} â€” deviceTokens=${tokens.length}${tokens.length ? ` (platform fields: web+mobile)` : ' â€” NO TOKENS IN DB'}${isChangesApproval ? ' (changes)' : ''}`);
 
         if (!tokens.length) {
-            logger.warn(`[APPROVE-FCM] Delivery ${partnerId} — push skipped; partner has no FCM token saved`);
+            logger.warn(`[APPROVE-FCM] Delivery ${partnerId} â€” push skipped; partner has no FCM token saved`);
         } else {
             const fcmResult = await notifyOwnerSafely(
                 { ownerType: 'DELIVERY_PARTNER', ownerId: partner._id },
@@ -4279,14 +4279,14 @@ async function sendDeliveryApprovalNotifications(partner, existing = {}, isChang
                     }
                 }
             );
-            logger.info(`[APPROVE-FCM] Delivery ${partnerId} — pushDelivered=${fcmResult?.successCount ?? 0}`);
+            logger.info(`[APPROVE-FCM] Delivery ${partnerId} â€” pushDelivered=${fcmResult?.successCount ?? 0}`);
         }
     } catch (e) {
-        logger.error(`[APPROVE-FCM] Delivery ${partnerId} — FCM failed: ${e?.message || e}`);
+        logger.error(`[APPROVE-FCM] Delivery ${partnerId} â€” FCM failed: ${e?.message || e}`);
     }
 
     if (!recipientEmail) {
-        logger.warn(`[APPROVE-EMAIL] Delivery ${partnerId} — email skipped (no email)`);
+        logger.warn(`[APPROVE-EMAIL] Delivery ${partnerId} â€” email skipped (no email)`);
         return false;
     }
 
@@ -4299,13 +4299,13 @@ async function sendDeliveryApprovalNotifications(partner, existing = {}, isChang
             isChangesApproval
         });
         if (emailSent) {
-            logger.info(`[APPROVE-EMAIL] Delivery ${partnerId} — email sent to ${recipientEmail}`);
+            logger.info(`[APPROVE-EMAIL] Delivery ${partnerId} â€” email sent to ${recipientEmail}`);
         } else {
-            logger.warn(`[APPROVE-EMAIL] Delivery ${partnerId} — email FAILED for ${recipientEmail}`);
+            logger.warn(`[APPROVE-EMAIL] Delivery ${partnerId} â€” email FAILED for ${recipientEmail}`);
         }
         return emailSent;
     } catch (e) {
-        logger.error(`[APPROVE-EMAIL] Delivery ${partnerId} — email error: ${e?.message || e}`);
+        logger.error(`[APPROVE-EMAIL] Delivery ${partnerId} â€” email error: ${e?.message || e}`);
         return false;
     }
 }
@@ -4369,8 +4369,8 @@ export async function rejectRestaurant(id, reason) {
         try {
             const { notifyOwnersSafely } = await import('../../../../core/notifications/firebase.service.js');
             const rejectTitle = isChangesRejection
-                ? 'Profile Changes Rejected ❌'
-                : 'Update on Registration 📋';
+                ? 'Profile Changes Rejected âŒ'
+                : 'Update on Registration ðŸ“‹';
             const rejectBody = isChangesRejection
                 ? `Your profile changes for "${updated.restaurantName}" were rejected. Reason: ${reason || 'Incomplete documents'}.`
                 : `Your restaurant registration for "${updated.restaurantName}" has been rejected. Reason: ${reason || 'Incomplete documents'}.`;
@@ -4553,7 +4553,7 @@ export async function createAdminOffer(body) {
             await notifyOwnersSafely(
                 [{ ownerType: 'RESTAURANT', ownerId: doc.restaurantId }],
                 {
-                    title: 'New Campaign Invitation! Ã°Å¸â€œÂ¢',
+                    title: 'New Campaign Invitation! ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã‚Â¢',
                     body: `You have been invited to join a new campaign: "${doc.couponCode}". Check it out now!`,
                     image: 'https://i.ibb.co/3m2Yh7r/Appzeto-Brand-Image.png',
                     data: {
@@ -4990,7 +4990,7 @@ export async function addDeliveryPartnerBonus(body, adminUser) {
         await notifyOwnerSafely(
             { ownerType: 'DELIVERY_PARTNER', ownerId: body.deliveryPartnerId },
             {
-                title: 'Bonus Credited! Ã°Å¸Å½Å ',
+                title: 'Bonus Credited! ÃƒÂ°Ã…Â¸Ã…Â½Ã…Â ',
                 body: `You have received a bonus of \u20B9${body.amount}. ${body.reference || 'Great job!'}`,
                 image: 'https://i.ibb.co/3m2Yh7r/Appzeto-Brand-Image.png',
                 data: {
@@ -5126,7 +5126,7 @@ export async function getDeliveryEarnings(query = {}) {
 
     const earnings = orders.map((order) => {
         const partner = order?.dispatch?.deliveryPartnerId;
-        // Real rider earning only — never fall back to delivery fee (that is not rider payout)
+        // Real rider earning only â€” never fall back to delivery fee (that is not rider payout)
         const amount = Number(order?.riderEarning || 0) || 0;
 
         return {
@@ -5364,7 +5364,7 @@ export async function creditEarningAddonHistory(historyId, notes) {
         await notifyOwnerSafely(
             { ownerType: 'DELIVERY_PARTNER', ownerId: doc.deliveryPartnerId },
             {
-                title: 'Incentive Credited! Ã°Å¸Å½Â¯',
+                title: 'Incentive Credited! ÃƒÂ°Ã…Â¸Ã…Â½Ã‚Â¯',
                 body: `Your incentive for "${doc.offerId?.title || 'Earning Addon'}" has been approved and moved to your pocket.`,
                 image: 'https://i.ibb.co/3m2Yh7r/Appzeto-Brand-Image.png',
                 data: {
@@ -5396,7 +5396,7 @@ export async function cancelEarningAddonHistory(historyId, reason) {
         await notifyOwnerSafely(
             { ownerType: 'DELIVERY_PARTNER', ownerId: doc.deliveryPartnerId },
             {
-                title: 'Incentive Update Ã°Å¸â€œâ€¹',
+                title: 'Incentive Update ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã¢â‚¬Â¹',
                 body: `Your incentive request for "${doc.offerId?.title || 'Earning Addon'}" was not approved. Reason: ${doc.cancelReason || 'Ineligible'}`,
                 image: 'https://i.ibb.co/3m2Yh7r/Appzeto-Brand-Image.png',
                 data: {
@@ -5711,8 +5711,8 @@ export async function rejectDeliveryPartner(id, reason) {
         try {
             const { notifyOwnerSafely } = await import('../../../../core/notifications/firebase.service.js');
             const rejectTitle = isChangesRejection
-                ? 'Profile Changes Rejected ❌'
-                : 'Onboarding Update 📋';
+                ? 'Profile Changes Rejected âŒ'
+                : 'Onboarding Update ðŸ“‹';
             const rejectBody = isChangesRejection
                 ? `Your delivery profile changes were rejected. Reason: ${reason || 'Incomplete documents'}.`
                 : `Your application to join as a delivery partner was rejected. Reason: ${reason || 'Incomplete documents'}.`;
@@ -6113,7 +6113,7 @@ export async function getDeliveryWallets(query = {}) {
     const wallets = partners.map((p) => {
         const partnerIdStr = String(p._id);
         const wallet = walletMap.get(partnerIdStr);
-        const partnerIdstr = p._id ? `DP-${p._id.toString().slice(-8).toUpperCase()}` : '—';
+        const partnerIdstr = p._id ? `DP-${p._id.toString().slice(-8).toUpperCase()}` : 'â€”';
         
         if (!p._id) {
             return {
@@ -6277,7 +6277,7 @@ export async function updateCashLimitSettlementStatus(depositId, body = {}, admi
     deposit.adminId = adminUser?._id || null;
     deposit.adminNote = action === 'received'
         ? 'Cash received and confirmed by admin'
-        : 'Cash not received — marked by admin';
+        : 'Cash not received â€” marked by admin';
     await deposit.save();
 
     const { getDeliveryPartnerWalletEnhanced, notifyDeliveryPartnerCashDepositStatus } = await import('../../delivery/services/deliveryFinance.service.js');
@@ -6459,7 +6459,7 @@ export async function getSidebarBadges() {
 
 /**
  * Admin-triggered Razorpay refund for a paid online order.
- * Status correction + gateway refund — does not re-run cancel automations.
+ * Status correction + gateway refund â€” does not re-run cancel automations.
  */
 export async function processRefund(orderId, refundAmount) {
     if (!mongoose.Types.ObjectId.isValid(orderId)) {

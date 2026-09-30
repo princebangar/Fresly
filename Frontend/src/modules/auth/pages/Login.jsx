@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+﻿import React, { useEffect, useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link, useNavigate } from "react-router-dom"
 import { Phone, Loader2, X, User, Pencil } from "lucide-react"
@@ -581,7 +581,7 @@ export default function UnifiedOTPFastLogin() {
           <div className="mb-10 mt-8 text-center flex flex-col items-center">
             <img
               src="/redgo_logo_transparent.png"
-              alt="RedGo Logo"
+              alt="Fresly Logo"
               className="h-28 mt-6 mb-1 object-contain drop-shadow-md"
             />
             <div className="text-sm text-gray-500 dark:text-gray-400 mt-0 font-medium flex items-center justify-center gap-1.5">
@@ -699,7 +699,7 @@ export default function UnifiedOTPFastLogin() {
                         }}
                         className={`w-14 h-14 sm:w-16 sm:h-16 text-center text-2xl font-bold bg-gray-50 dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-sm rounded-[20px] outline-none transition-all duration-300 text-gray-900 dark:text-white focus:bg-white dark:focus:bg-gray-900 focus:border-[#B80B3D] focus:ring-4 focus:ring-[#B80B3D]/10 hover:border-gray-400 ${blockTimer > 0 ? "opacity-50 cursor-not-allowed border-red-400 bg-red-50 text-red-800" : ""
                           }`}
-                        placeholder="•"
+                        placeholder="â€¢"
                       />
                     ))}
                   </div>
@@ -777,9 +777,9 @@ export default function UnifiedOTPFastLogin() {
               <p className="text-[11px] text-gray-400/80 font-medium leading-relaxed max-w-[320px] mx-auto">
                 By continuing, you agree to our <br />
                 <Link to="/user/profile/terms" state={{ from: "/user/auth/login" }} className="text-gray-400 hover:text-[#B80B3D] transition-colors uppercase tracking-wider font-semibold">TERMS</Link>
-                <span className="mx-2 text-gray-400/80 font-bold">•</span>
+                <span className="mx-2 text-gray-400/80 font-bold">â€¢</span>
                 <Link to="/user/profile/privacy" state={{ from: "/user/auth/login" }} className="text-gray-400 hover:text-[#B80B3D] transition-colors uppercase tracking-wider font-semibold">PRIVACY</Link>
-                <span className="mx-2 text-gray-400/80 font-bold">•</span>
+                <span className="mx-2 text-gray-400/80 font-bold">â€¢</span>
                 <Link to="/user/profile/support-info" state={{ from: "/user/auth/login" }} className="text-gray-400 hover:text-[#B80B3D] transition-colors uppercase tracking-wider font-semibold">SUPPORT</Link>
               </p>
             </div>

@@ -1,15 +1,15 @@
-/* eslint-disable no-undef */
+﻿/* eslint-disable no-undef */
 /**
  * Firebase Cloud Messaging service worker.
  * Background/closed-app delivery depends on Firebase initializing here.
- * Config sources (in order): Cache written by the page → public env API.
+ * Config sources (in order): Cache written by the page â†’ public env API.
  */
 importScripts("https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js");
 importScripts("https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js");
 
 const sanitize = (value) => String(value || "").trim().replace(/^['"]|['"]$/g, "");
-const CONFIG_CACHE = "redgo-fcm-config-v1";
-const CONFIG_URL = "/__redgo_fcm_web_config__";
+const CONFIG_CACHE = "fresly-fcm-config-v1";
+const CONFIG_URL = "/__fresly_fcm_web_config__";
 const notificationDedupWindowMs = 30000;
 
 let messagingReady = false;
@@ -116,8 +116,8 @@ async function resolveFirebaseConfig() {
 
 function shouldSkipDuplicateOsNotification(notificationKey) {
   if (!notificationKey) return false;
-  if (!self.__redgoOsDedup) self.__redgoOsDedup = {};
-  const shared = self.__redgoOsDedup;
+  if (!self.__freslyOsDedup) self.__freslyOsDedup = {};
+  const shared = self.__freslyOsDedup;
   const now = Date.now();
   for (const [key, timestamp] of Object.entries(shared)) {
     if (now - Number(timestamp) > notificationDedupWindowMs) delete shared[key];
@@ -154,7 +154,7 @@ async function hasVisibleFocusedClient(payload = {}) {
   const windowClients = await clients.matchAll({ type: "window", includeUncontrolled: true });
   if (!windowClients.length) return false;
 
-  // Any focused/visible tab → page foreground handler owns UX (sound/toast).
+  // Any focused/visible tab â†’ page foreground handler owns UX (sound/toast).
   const anyVisible = windowClients.some(
     (client) => client.visibilityState === "visible" || client.focused,
   );
@@ -204,7 +204,7 @@ async function showOsNotificationFromPayload(payload) {
   const data = normalized.data || {};
   const title =
     String(normalized?.notification?.title || data.title || "New Notification")
-      .replace(/^[👤🏪🛵🛡️]\s*/, "")
+      .replace(/^[ðŸ‘¤ðŸªðŸ›µðŸ›¡ï¸]\s*/, "")
       .replace(/^\[(User|Shop|Rider|Admin)\]\s*/i, "")
       .trim() || "New Notification";
   const body = String(
@@ -225,7 +225,7 @@ async function showOsNotificationFromPayload(payload) {
     icon: "/favicon.ico",
     badge: "/favicon.ico",
     image,
-    tag: notificationKey || `redgo-${Date.now()}`,
+    tag: notificationKey || `fresly-${Date.now()}`,
     renotify: data.type === "admin_broadcast",
     silent: false,
     requireInteraction: data.type === "admin_broadcast",
@@ -251,7 +251,7 @@ async function ensureFirebaseMessaging() {
       messaging.onBackgroundMessage(async (payload) => {
         await notifyOpenClients(payload);
         if (await hasVisibleFocusedClient(payload)) return;
-        // Always show tray for background/closed — title/body come from
+        // Always show tray for background/closed â€” title/body come from
         // notification block and/or data mirrors from the server.
         await showOsNotificationFromPayload(payload);
       });
@@ -274,7 +274,7 @@ void ensureFirebaseMessaging();
 self.addEventListener("message", (event) => {
   const data = event?.data;
   if (!data || typeof data !== "object") return;
-  if (data.type === "REDGO_FCM_CONFIG" && data.config) {
+  if (data.type === "FRESLY_FCM_CONFIG" && data.config) {
     event.waitUntil(
       (async () => {
         await writeCachedFirebaseConfig(data.config);
@@ -286,7 +286,7 @@ self.addEventListener("message", (event) => {
 
 /**
  * Fallback when Firebase messaging never initialized (missing config on cold start).
- * If messaging IS ready, onBackgroundMessage owns display — skip to avoid doubles.
+ * If messaging IS ready, onBackgroundMessage owns display â€” skip to avoid doubles.
  */
 self.addEventListener("push", (event) => {
   event.waitUntil(

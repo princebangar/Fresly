@@ -1,5 +1,5 @@
-export const APP_CONFIG = {
-  NAME: 'RedGo',
+﻿export const APP_CONFIG = {
+  NAME: 'Fresly',
   VERSION: '1.0.0',
 };
 
