@@ -1,9 +1,9 @@
-/**
+﻿/**
  * Maintenance lock is for LIVE users only.
- * Local `npm run dev` / localhost UI never shows the page — even when the
+ * Local `npm run dev` / localhost UI never shows the page â€” even when the
  * shared live backend has maintenance_mode_enabled=true in DB.
  *
- * Backend also bypasses API lock for localhost Origin / X-Redgo-Client: local-dev
+ * Backend also bypasses API lock for localhost Origin / X-Fresly-Client: local-dev
  * so local frontend + same live API keep working.
  *
  * Optional local preview: VITE_FORCE_MAINTENANCE=true or ?forceMaintenance=1
@@ -18,7 +18,7 @@ export function shouldEnforceMaintenanceOnClient() {
       return true;
     }
 
-    // Vite dev server — never lock local work
+    // Vite dev server â€” never lock local work
     if (import.meta.env.DEV) return false;
 
     const host = String(window.location.hostname || "").toLowerCase();

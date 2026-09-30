@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+﻿import { toast } from "sonner";
 import { showNotificationToast } from "@/shared/utils/customToasts";
 import { userAPI, restaurantAPI, deliveryAPI, adminAPI } from "@food/api";
 import { initializeApp, getApp, getApps } from "firebase/app";
@@ -195,10 +195,10 @@ export async function collectFcmTokenFast(moduleName, options = {}) {
 }
 
 /**
- * Signup finish / complete — same flow that worked for delivery (commit 5f54105).
+ * Signup finish / complete â€” same flow that worked for delivery (commit 5f54105).
  * 1) collectFcmTokenFast on button click (+ retry)
  * 2) token sent in register API
- * 3) finalize* → syncPendingPartnerFcmQuick saves again in background
+ * 3) finalize* â†’ syncPendingPartnerFcmQuick saves again in background
  */
 export async function collectFcmTokenForSignup(moduleName) {
   if (isFlutterWebView()) {
@@ -222,7 +222,7 @@ export async function collectFcmTokenForSignup(moduleName) {
       platform = retry.platform;
     }
   } catch {
-    // Non-blocking — pending-save will retry on verification screen.
+    // Non-blocking â€” pending-save will retry on verification screen.
   }
   if (fcmToken) {
     setSavedToken(moduleName, fcmToken);
@@ -256,7 +256,7 @@ export async function syncNativeAppPushToken(moduleName, phone) {
 }
 
 /**
- * Onboarding submit fallback — cached token only (prefer collectFcmTokenOnSignupSubmit).
+ * Onboarding submit fallback â€” cached token only (prefer collectFcmTokenOnSignupSubmit).
  */
 export function getCachedFcmTokenForSubmit(moduleName) {
   const cached = normalizeFcmBridgeToken(getSavedToken(moduleName));
@@ -323,12 +323,12 @@ export async function collectNativeFcmToken(moduleName, options = {}) {
   };
 }
 
-/** @deprecated Use collectFcmTokenFast("restaurant") — kept for older bundles */
+/** @deprecated Use collectFcmTokenFast("restaurant") â€” kept for older bundles */
 export function collectRestaurantFcmToken(options = {}) {
   return collectFcmTokenFast("restaurant", options);
 }
 
-/** @deprecated Use collectFcmTokenFast("delivery") — kept for older bundles */
+/** @deprecated Use collectFcmTokenFast("delivery") â€” kept for older bundles */
 export function collectDeliveryFcmToken(options = {}) {
   return collectFcmTokenFast("delivery", options);
 }
@@ -747,7 +747,7 @@ export function isPushSoundEnabled() {
 }
 
 async function triggerWebViewNativeNotification(payload = {}) {
-  // Flutter shell already displays FCM alerts natively — avoid a second OS notification.
+  // Flutter shell already displays FCM alerts natively â€” avoid a second OS notification.
   if (isFlutterWebView()) return false;
 
   if (typeof window === "undefined") return false;
@@ -981,7 +981,7 @@ async function syncFirebaseConfigToServiceWorker(registration, firebasePublicEnv
 
   const post = (sw) => {
     try {
-      sw?.postMessage({ type: "REDGO_FCM_CONFIG", config });
+      sw?.postMessage({ type: "FRESLY_FCM_CONFIG", config });
     } catch {
       // ignore
     }
@@ -1154,7 +1154,7 @@ async function saveTokenByModule(moduleName, token, platform = "web") {
   if (!normalizedToken) return;
 
   if (getBackendSyncedToken(moduleName) === normalizedToken) {
-    pushDebugLog(PUSH_DEBUG_PREFIX, "FCM token unchanged — skip backend save", {
+    pushDebugLog(PUSH_DEBUG_PREFIX, "FCM token unchanged â€” skip backend save", {
       moduleName,
       platform,
     });
@@ -1487,7 +1487,7 @@ export async function registerWebPushForCurrentModule(pathname = window.location
 
   const cachedToken = getSavedToken(moduleName);
   if (cachedToken && getBackendSyncedToken(moduleName) === cachedToken) {
-    pushDebugLog(PUSH_DEBUG_PREFIX, "FCM already synced this session — skip registration", {
+    pushDebugLog(PUSH_DEBUG_PREFIX, "FCM already synced this session â€” skip registration", {
       moduleName,
     });
     return;

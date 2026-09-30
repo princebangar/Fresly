@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Normalize API / network errors for rider-facing UI.
  * Technical prefixes (e.g. Flutter "Upload/API Failed") stay in the console only.
  */
@@ -52,7 +52,7 @@ function statusFallback(status) {
   return "Something went wrong. Please try again.";
 }
 
-/** Ask native shell to hide its own snackbar — web already shows a toast. */
+/** Ask native shell to hide its own snackbar â€” web already shows a toast. */
 function dismissNativeApiErrorBanner() {
   if (typeof window === "undefined") return;
   const bridge = window.flutter_inappwebview;
@@ -270,18 +270,18 @@ function scrubNativeApiErrorBanner(el) {
  */
 export function installNativeApiErrorBridge() {
   if (typeof window === "undefined") return;
-  if (window.__redgoNativeApiErrorBridgeInstalled) return;
-  window.__redgoNativeApiErrorBridgeInstalled = true;
+  if (window.__freslyNativeApiErrorBridgeInstalled) return;
+  window.__freslyNativeApiErrorBridgeInstalled = true;
 
   const handlePayload = (payload) => {
     if (payload == null) return;
     showNativeShellApiError(payload);
   };
 
-  window.redgoOnNativeApiError = handlePayload;
+  window.freslyOnNativeApiError = handlePayload;
   window.handleNativeApiError = handlePayload;
   window.showApiErrorToast = handlePayload;
-  window.__redgoHandleNativeApiError = handlePayload;
+  window.__freslyHandleNativeApiError = handlePayload;
 
   window.addEventListener("message", (event) => {
     const data = event?.data;
@@ -297,7 +297,7 @@ export function installNativeApiErrorBridge() {
     }
   });
 
-  window.addEventListener("redgo:native-api-error", (event) => {
+  window.addEventListener("fresly:native-api-error", (event) => {
     handlePayload(event?.detail);
   });
 

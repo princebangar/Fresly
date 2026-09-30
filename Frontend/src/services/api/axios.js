@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Central API client for backend (auth and future APIs).
  * - baseURL from VITE_API_BASE_URL (e.g. http://localhost:5000/api/v1)
  * - When baseURL ends with /api/v1, request paths must NOT include /v1 (use /food/..., /auth/...)
@@ -153,7 +153,7 @@ apiClient.interceptors.request.use(
 
     // Same live backend: mark local frontend so maintenance APIs stay open for dev.
     if (isLocalDevBrowser()) {
-      config.headers["X-Redgo-Client"] = "local-dev";
+      config.headers["X-Fresly-Client"] = "local-dev";
     }
 
     const token = getAccessToken(config);

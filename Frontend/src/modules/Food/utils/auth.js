@@ -1,4 +1,4 @@
-/**
+﻿/**
  * JWT Token Utilities
  * Decode and extract information from JWT tokens
  */
@@ -212,7 +212,7 @@ export function clearUserSession() {
   keys.forEach((k) => localStorage.removeItem(k));
   // Next login should fetch current GPS like a fresh app open.
   try {
-    sessionStorage.removeItem("redgo_location_session");
+    sessionStorage.removeItem("fresly_location_session");
     sessionStorage.removeItem("lastLoginLocationFetch");
     localStorage.setItem("deliveryAddressMode", "current");
   } catch {
